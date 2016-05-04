@@ -27,6 +27,10 @@ with open('addresses') as addresses:
 					for passwd in passwords:
 
 						try:
+
+							if source_port == 65536:
+								source_port = 49152
+
 							user = user.strip()
 							passwd = passwd.strip()
 							s = socket(AF_INET, SOCK_STREAM)
@@ -56,17 +60,13 @@ with open('addresses') as addresses:
 							else:
 								print "[" + colored("!", 'yellow', attrs=['bold']) + "]", user, "-", colored(login_status[:3], 'yellow', attrs=['bold']), colored("Unexpected Error", 'yellow', attrs=['bold']) +  " - (" + user + ":" + passwd +")"
 
-							if source_port == 65536:
-								source_port = 49151
+
 						
 						except error as socket_error:
 
         						if socket_error.args[0] == 98:
 	        						print "Port", source_port, "already in use...Trying", source_port + 1
 	        						source_port = source_port + 1
-
-									if source_port == 65536:
-										source_port = 49151
 
 	        					elif socket_error.args[0] == 111:
 	        						print "Port", server_port, "is closed."
