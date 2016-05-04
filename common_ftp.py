@@ -57,7 +57,7 @@ with open('addresses') as addresses:
 
 						
 						except error as socket_error:
-	        					elif socket_error.args[0] == 111:
+	        					if socket_error.args[0] == 111:
 	        						print "Port", server_port, "is closed."
 	        						sys.exit(0)
 
