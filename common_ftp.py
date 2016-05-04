@@ -65,33 +65,6 @@ with open('addresses') as addresses:
 	        						print "Port", source_port, "already in use...Trying", source_port + 1
 	        						source_port = source_port + 1
 
-		        					s = socket(AF_INET, SOCK_STREAM)
-									s.bind(('0.0.0.0', source_port))
-									s.connect(server_socket)
-									s.recv(4096)
-									s.send("USER " + user + "\r\n")
-									s.recv(4096)
-									s.send("PASS " + passwd + "\r\n")
-									login_status = s.recv(4096)
-									s.shutdown(SHUT_RDWR)
-									s.close()					
-
-									if login_status[:3] == "230":
-										print "[" + colored("+", 'green', attrs=['bold']) + "]", user, "-", colored(login_status[:3], 'green', attrs=['bold']), colored("Login Successful", 'green', attrs=['bold']) +  " - (" + user + ":" + passwd +")"
-										break
-
-
-									elif login_status[:3] == "530":
-										if user == "anonymous":
-											print "[" + colored("-", 'red', attrs=['bold']) + "]", user, "-", colored(login_status[:3], 'red', attrs=['bold']), colored("Login Disabled", 'red', attrs=['bold']) +  " - (" + user + ":" + passwd +")"
-											break
-
-										print "[" + colored("-", 'red', attrs=['bold']) + "]", user, "-", colored(login_status[:3], 'red', attrs=['bold']), colored("Login Failed", 'red', attrs=['bold']) +  " - (" + user + ":" + passwd +")"
-
-
-									else:
-										print "[" + colored("!", 'yellow', attrs=['bold']) + "]", user, "-", colored(login_status[:3], 'yellow', attrs=['bold']), colored("Unexpected Error", 'yellow', attrs=['bold']) +  " - (" + user + ":" + passwd +")"
-
 									if source_port == 65536:
 										source_port = 49151
 
