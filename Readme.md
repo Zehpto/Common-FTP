@@ -7,7 +7,7 @@ A tool to check common username and password combinations against FTP Servers.
 
 1. pip install termcolor
 
-2. Add hosts to "addresses" one per line.
+2. Add hosts/IPs to "addresses" one per line.
 
 3. Launch
 
